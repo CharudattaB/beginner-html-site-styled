@@ -18,9 +18,9 @@ pipeline {
             steps {
                 script {
                     // The docker.build command uses the Docker plugin.
-                    // 'my-website:${BUILD_NUMBER}' tags the image with the job's build number, ensuring a unique tag for each run.
+                    // Using double quotes allows the ${env.BUILD_NUMBER} variable to be correctly evaluated.
                     echo "Building Docker image..."
-                    def dockerImage = docker.build('my-website:${BUILD_NUMBER}')
+                    def dockerImage = docker.build("my-website:${env.BUILD_NUMBER}")
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
                     // --name: gives the container a predictable name
                     // -p 99:80: maps port 99 on the host (agent machine) to port 80 in the container
                     echo "Deploying new container..."
-                    sh 'docker run -d --name my-website-container -p 99:80 my-website:${BUILD_NUMBER}'
+                    sh "docker run -d --name my-website-container -p 99:80 my-website:${env.BUILD_NUMBER}"
                 }
             }
         }
