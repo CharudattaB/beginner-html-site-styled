@@ -9,7 +9,7 @@ pipeline {
         // 2. The 'Checkout' stage clones the repository onto the agent.
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/CharudattaB/beginner-html-site-styled.git'
+                git branch: 'gh-pages', url: 'https://github.com/CharudattaB/beginner-html-site-styled.git'
             }
         }
 
